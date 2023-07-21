@@ -1,0 +1,86 @@
+
+.mini-header {
+    /*background-color: #f5f5f5;*/
+    background-color: #b5babd;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .icon-container {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  .text-container {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .container {
+    display: flex;
+    align-items: stretch; /* Stretch items vertically */
+    background-color:#BEC4C7;
+    min-height: 100vh;
+  }
+  
+  .image-container {
+    flex: 1; /* Take up 1/2 of the container width */
+  }
+  
+  .content-container {
+    flex: 1; /* Take up 1/2 of the container width */
+  }
+ 
+  .half-image {
+    width: calc(40vw - 2rem); /* Subtract padding/margin from the total width */
+    height: calc(70vh - 2rem); /* Subtract padding/margin from the total height */
+    object-fit: cover; /* Maintain aspect ratio and fill the container */
+    margin-top: 40px; /* Distance from the top */
+    margin-left: 100px; /* Distance from the left */
+    border-radius: 20px;
+    border-style:ridge;
+  }
+
+  .quantity-button{
+    height: 5.8vh;
+    border-radius: 2.5px;
+    width: 10px;
+    background-color: #f5f5f5;
+    
+  }
+
+  .quantity-input {
+    width: 85px; /* Adjust the width of input box */
+    
+  }
+
+
+  .quantity-input input {
+    text-align: center; /*target the input element of the quantity-input class to align the input value to center of input box*/
+  }
+
+  .cart-button{
+    /*width: 28%;
+    height: 5.5vh;
+    display: flex;
+    justify-content:flex-start; */
+    display: inline-block; /* Both display and vertical-align is to make the icon and word in button align*/
+    vertical-align: middle; 
+  }
+  
+  .cart-button mat-icon {
+    font-size: 20px; /* Access the mat-icon element inside cart-button class and adjust the font size as per your preference */
+  }
+  
+  .cart-button span {
+    font-size: 16px; /* Access the span element inside cart-button class and adjust the font size as per your preference */
+  }
+  
+  .description{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    width:70%;
+  }

@@ -1,0 +1,74 @@
+<div style="background-color: #BEC4C7; min-height:100vh; display: flex;">
+<mat-card>
+    <form [formGroup]="particularsForm">
+        <h2 style="margin-top:20px;">Contact Details</h2>
+
+        <table class="example-full-width" cellspacing="20">
+            <tr>
+            <td><mat-form-field class="example-full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="customerFirstName">
+              <mat-error *ngIf="particularsForm.get('customerFirstName')?.hasError('required')">
+                First Name is required!
+              </mat-error>
+            </mat-form-field></td>
+            <td><mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="customerLastName">
+              <mat-error *ngIf="particularsForm.get('customerLastName')?.hasError('required')">
+                Last Name is required!
+              </mat-error>
+            </mat-form-field></td>
+          </tr>
+            
+          <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput formControlName = "email" placeholder="pat@hotmail.com">
+                    <mat-error *ngIf="particularsForm.get('email')?.hasError('required')">Email is required.</mat-error>
+                    <mat-error *ngIf="particularsForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error> 
+                </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Enter your Mobile Contact No.</mat-label>
+                    <input matInput formControlName = "contact" placeholder="Ex.: +60-16-xxx xxxx">
+                    <mat-error *ngIf="particularsForm.get('contact')?.hasError('required')">Please enter your mobile phone number</mat-error>
+                    <mat-error *ngIf="particularsForm.get('contact')?.hasError('pattern')">Please enter a valid phone number</mat-error>
+                    <mat-hint class="hint">note: Please include country code for overseas number</mat-hint> 
+                </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <p>
+            <mat-form-field class="comment-format">
+              <mat-label>Any Comments for Your Order? (optional)</mat-label>
+              <textarea matInput formControlName = "comments"></textarea>
+            </mat-form-field>
+        </p>
+
+        <table cellspacing="">
+            <tr>
+                <td class="radio-format">Payment Method:</td>
+            <td><mat-radio-group formControlName="paymentMode" (change)="onPaymentModeChange()">
+                <mat-radio-button value="cash">Cash Upon Delivery</mat-radio-button>
+                <mat-radio-button value="online_payment">Online Payment/Credit Card</mat-radio-button>
+                <mat-error *ngIf="particularsForm.get('paymentMode')?.hasError('required')">Please select a payment mode</mat-error>
+            </mat-radio-group></td>
+            </tr>
+        </table>
+        <br><br>
+        <div class="button">
+            <button mat-raised-button [routerLink]="['/products']">Back</button>
+            <button mat-raised-button [ngStyle]="{'background-color':  particularsForm.invalid ? 'lightgray' : 'green', 'color': particularsForm.invalid ? 'grey' : 'white'}" [disabled]="particularsForm.invalid" (click)="processCheckout()">{{buttonText}}</button>
+            
+        </div>
+        
+    </form>
+</mat-card>
+</div>

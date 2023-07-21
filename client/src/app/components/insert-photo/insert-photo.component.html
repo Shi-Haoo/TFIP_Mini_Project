@@ -1,0 +1,52 @@
+
+
+<mat-card *ngIf="isLoggedIn; else login">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <h2>Upload New Product Image</h2>
+            <mat-form-field>
+                <mat-label>Select Image File to Upload</mat-label>
+                <input type="text" matInput readonly matInput formControlName="selectedImageOriginalName" />
+                <!--uploadFile.click() is a method call on the uploadFile element reference. It triggers a click 
+                    event on the hidden file input element, which in turn opens the file selection dialog.-->
+                <button mat-icon-button matSuffix (click)="uploadFile.click()">
+                    <mat-icon>add_photo_alternate</mat-icon>
+                  </button>
+                  <!--Everytime a file is selected, (change) event is triggered and call for handleFileInputChange()-->
+                <input type="file" accept="image/*" hidden #uploadFile (change)="handleFileInputChange()">
+                <mat-error *ngIf="form.get('selectedImageOriginalName')?.hasError('required')">
+                    Please choose an image to insert
+                  </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Image File Name</mat-label>
+                <input matInput formControlName="imageFileName">
+                <mat-error *ngIf="form.get('imageFileName')?.hasError('required')">
+                    Please give your image file a name
+                  </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="accent" [disabled]="form.invalid" class="full-width-button" (click)="upload()">Upload
+                <mat-icon>file_upload</mat-icon>
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="uploadSuccess">
+    <mat-card-subtitle class="image-icon">Submitted Image Files:</mat-card-subtitle>
+    
+    <mat-card-content class="image-content">
+        <mat-icon class="image-icon">image</mat-icon>
+        <span>{{uploadedFileName}}</span>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #login>
+    <mat-card>
+        <mat-card-content>
+            <mat-error><a mat-button [routerLink]="['/login']" color="warn">Please login first</a></mat-error>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

@@ -1,0 +1,23 @@
+
+<!--To display online payment error-->
+<div mat-dialog-content *ngIf="data.cardError; else other_error" class="center-display">
+    <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+    <h1 style="color:red"><strong>{{data.errorMessage.type}}</strong></h1>
+    <p class="content-width">{{data.errorMessage.message}}</p>
+    <mat-dialog-actions>
+        <button mat-stroked-button color="warn" (click)="reload()">Close</button>
+    </mat-dialog-actions>
+</div>
+
+<ng-template #other_error>
+    <div mat-dialog-content class="center-display">
+        <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+        <h1 style="color:red"><strong>{{data.errorMessage.decline_code}}</strong></h1>
+        <p class="content-width">{{data.errorMessage.message}}</p>
+        <mat-dialog-actions>
+            <button mat-stroked-button color="warn" (click)="reload()">Close</button>
+        </mat-dialog-actions>
+    </div>
+</ng-template>
+
+<!--"An unexpected error occurred. Please try again or select another payment method"-->

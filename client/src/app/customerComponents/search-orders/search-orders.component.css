@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100vh; 
+    padding-left: 50px;
+    padding-right:50px;
+    
+    background-color:#BEC4C7;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 30%;
+  }
+
+
+  .button{
+    background-color: green;
+    color: white
+  }
+
+
+  .final-price{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    color:darkgreen
+  }
+
+  .mat-mdc-table-sticky {
+    border-top: 2px solid #e0e0e0;
+  }
+
+  .shop-button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .shop-button-container span {
+    margin-right: 10px;
+  }

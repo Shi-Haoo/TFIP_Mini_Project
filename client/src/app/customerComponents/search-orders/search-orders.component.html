@@ -1,0 +1,91 @@
+
+<div class="container">
+    <form [formGroup]="searchForm">
+<mat-form-field color="accent" style="margin-top: 20px;">
+    <mat-label>Enter Your Order Id</mat-label>
+    <input matInput formControlName = "orderId" placeholder="Ex: 154773g2">
+    <button mat-icon-button matTooltip="Accent" color="accent" matSuffix (click)="searchOrder()"><mat-icon>search</mat-icon></button>
+</mat-form-field>
+</form>
+
+<table mat-table [dataSource]="dataSource" matSort>
+    <!-- ID Column -->
+    <ng-container matColumnDef="order_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.order_id}} </td>
+        <td mat-footer-cell *matFooterCellDef class="final-price"> Total </td>
+      </ng-container>
+  
+      <!-- Customer Name Column -->
+      <ng-container matColumnDef="customer_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.customer_name}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Order Date Column -->
+      <ng-container matColumnDef="order_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.order_date}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Product Name Column -->
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+        <td mat-cell *matCellDef="let row"> {{row.product}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="total_price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.total_price|currency}} </td>
+        <td mat-footer-cell *matFooterCellDef class="final-price">{{totalPrice|currency}}</td>
+      </ng-container>
+
+      <!-- Delivery Status Column -->
+      <ng-container matColumnDef="delivery_status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.delivery_status}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+
+      <!-- Actions Column -->
+      <!--ng-container matColumnDef="received">
+        <th mat-header-cell *matHeaderCellDef> Item Received? </th>
+        <td mat-cell *matCellDef="let i = index"> 
+          <button mat-raised-button class="button" (click)="changeDeliveryStatus(i)"> Received
+          </button></td>
+      </ng-container-->
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+</table>
+
+<div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+</div>
+<mat-divider></mat-divider>
+<br>
+<div>
+    <button mat-raised-button [routerLink]="['/products']">Back to Shopping</button>
+    &nbsp;&nbsp;&nbsp;
+    <button mat-raised-button [ngStyle]="{'background-color':  orderNotFound ? 'lightgray' : 'green', 'color': orderNotFound ? 'grey' : 'white'}" (click)="changeDeliveryStatus()" [disabled]="orderNotFound">Order Received</button>
+  </div>
+<br><br>
+<div *ngIf=" orderNotFound">
+    <h1>No Pending Order Found Based on Order Id: {{orderId}}. <a mat-button color= accent style="font-size: 23px; font-weight: bold;" [routerLink]="['/products']">Shop</a>for More?</h1>
+</div>
+
+
+

@@ -1,0 +1,54 @@
+
+
+.header{
+    
+    background-image: url('https://img.freepik.com/premium-photo/korean-food-cabbage-kimchi-black-dish-set-dark-background_38038-225.jpg?w=2000');
+    
+    background-position: center;
+    background-size: cover;
+    height:200px;
+    display: flex; /*display: flex; along with align-items: center; and justify-content: center; to vertically and horizontally center the content within the header */
+    align-items: center; 
+    justify-content: center;
+}
+
+.header h1 {
+    color: wheat;
+    font-size: 50px;
+  }
+
+  .container {
+    display: flex;
+    align-items: stretch; /* Stretch items vertically */
+    min-height:100vh;
+    padding-top: 5%;
+    background-color:#BEC4C7;
+  }
+
+  .google-map-container {
+    flex: 1; /* Take up 1/2 of the container width */
+  }
+  
+  .content-container {
+    flex: 1; /* Take up 1/2 of the container width */
+    padding-left:130px;
+  }
+
+  .communicate-alignment{
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 10px;
+  }
+
+  .word-style{
+    font-size: 17px;
+    font-weight: bolder;
+  }
+
+
+.socialSvg {
+    width: 2em;
+    height: 2em;
+    vertical-align: middle;
+}
+  

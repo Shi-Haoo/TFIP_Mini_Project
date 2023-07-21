@@ -1,0 +1,23 @@
+
+table {
+    width: 100%;
+  }
+
+td, th {
+    width: 0%;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .small-button {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    background-color: green;
+    color: white;
+  }
+
+  

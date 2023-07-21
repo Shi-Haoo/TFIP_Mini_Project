@@ -1,0 +1,115 @@
+
+.header{
+    
+    background-image: url('https://img.freepik.com/premium-photo/korean-food-cabbage-kimchi-black-dish-set-dark-background_38038-225.jpg?w=2000');
+    
+    background-position: center;
+    background-size: cover;
+    height:200px;
+    display: flex; /*display: flex; along with align-items: center; and justify-content: center; to vertically and horizontally center the content within the header */
+    align-items: center; 
+    justify-content: center;
+}
+
+.header h1 {
+    color: wheat;
+    font-size: 50px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100vh; 
+    padding-left: 50px;
+    padding-right:50px;
+    
+    background-color:#BEC4C7;
+  }
+
+  table {
+    margin-top: 20px;
+    width: 100%;
+    
+  }
+
+td, th {
+    width: 30%;
+  }
+
+  
+
+.img{
+    margin-top:10px;
+    height: 6vh;
+    width: 3vw;
+    object-fit: cover; /*Maintain aspect ratio*/
+    border-radius: 10px;
+    vertical-align: middle; /*Align such that product name aligned with the center of image*/
+}
+
+.quantity-button{
+    margin-bottom:10px;
+    height: 5vh;
+    border-radius: 3px;
+    
+  }
+
+  .quantity-input {
+    margin-top:10px;
+    width: 50px; /* Adjust the width of input box */
+    height: 70px;
+    
+  }
+
+
+  .quantity-input input {
+    text-align: center; /*target the input element of the quantity-input class to align the input value to center of input box*/
+  }
+
+  .empty-cart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    font-size: 24px;
+  }
+
+  
+  .empty-cart mat-icon {
+    font-size: 26px; 
+  }
+  
+  .empty-cart a {
+    font-size: 23px; 
+  }
+
+  .final-price{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    color:darkgreen
+  }
+
+
+  tr.mat-mdc-footer-row {
+    font-weight: bold;
+    
+  }
+  
+  .mat-mdc-table-sticky {
+    border-top: 2px solid #e0e0e0;
+  }
+
+  .button{
+    display: flex;
+    justify-content:flex-end;
+    
+  }
+
+  .continue-button{
+    color:white;
+    background-color: darkgreen;
+  }

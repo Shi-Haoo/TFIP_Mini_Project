@@ -1,0 +1,40 @@
+
+
+<mat-card *ngIf="isLoggedIn; else login">
+    <mat-card-content>
+        <form [formGroup]="updatePhotoForm">
+            <h2>Update Product Display Photo</h2>
+            <mat-form-field>
+                <mat-label>Type in Name of Image File in Database</mat-label>
+                <input matInput formControlName="imageName">
+                <mat-hint *ngIf="displayMatHint">note: this is not case-sensitive</mat-hint>
+                <mat-error *ngIf="updatePhotoForm.get('imageName')?.hasError('required')">
+                    This field is mandatory
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="accent" [disabled]="updatePhotoForm.invalid" class="full-width-button" (click)="update()">Update
+                <mat-icon>file_upload</mat-icon>
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+
+<mat-card *ngIf="retrievedSuccess">
+    <h2>Updated Product Image</h2>
+    <div>
+        <img mat-card-xl-image [src]="imageDataUrl" alt="">
+    </div>
+</mat-card>
+
+
+<ng-template #login>
+    <div class="background">
+    <mat-card>
+        <mat-card-content>
+            <mat-error><a mat-button [routerLink]="['/login']" color="warn">Please login first</a></mat-error>
+        </mat-card-content>
+    </mat-card>
+    </div>
+</ng-template>

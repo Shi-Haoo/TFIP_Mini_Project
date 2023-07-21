@@ -1,0 +1,40 @@
+
+
+<mat-card *ngIf="isLoggedIn; else login">
+    <mat-card-content>
+        <form [formGroup]="updateForm" (submit)="postUpdate()">
+            <h2>Update Product Description</h2>
+            <mat-form-field>
+                <mat-label>Select Product</mat-label>
+                <mat-select formControlName="productName">
+                    <mat-option value="kimchi_500">Kimchi(500g)</mat-option>
+                    <mat-option value="kimchi_750">Kimchi(750g)</mat-option>
+                </mat-select>
+                <mat-error *ngIf="updateForm.get('productName')?.hasError('required')">
+                    Please select a product to update
+                  </mat-error>
+            </mat-form-field>
+                
+            <mat-form-field>
+                <mat-label>Product Description</mat-label>
+                <textarea matInput formControlName="productDescription"></textarea>
+                <mat-error *ngIf="updateForm.get('productDescription')?.hasError('required')">
+                    Please type in your product description to update
+                  </mat-error>
+            </mat-form-field>
+            <br>
+            
+            <button mat-raised-button color="accent" type="submit" [disabled]="updateForm.invalid" class="full-width-button">Save
+                <mat-icon>save</mat-icon>
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #login>
+    <mat-card>
+        <mat-card-content>
+            <mat-error><a mat-button [routerLink]="['/login']" color="warn">Please login first</a></mat-error>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

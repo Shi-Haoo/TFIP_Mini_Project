@@ -1,0 +1,49 @@
+
+.center-it {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    /*background-image: url('https://www.foodcraft.hk/cdn/shop/products/KoreanRedPepperPowder-500g_1_600x600.jpg?v=1628861087');*/
+    background-color: #BEC4C7;
+    /*background-color: rgba(231, 231, 227, 0.829); /* Adjust the last value (0.5) for transparency */
+    /*background-blend-mode: overlay; /* Optional: Applies blending mode for the background */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .home-title {
+    font-size: 52px;
+    font-style: normal;
+    font-family: Urbanist;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 30px;
+  }
+
+  .home-description {
+
+    font-size: 28px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    
+  }
+
+  .full-width-button {
+    border-radius: 15px;
+    width: 300px;
+    height: 80px;
+    background-color: #E5E9EB;
+    box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.45); /* Adjust the values to increase/decrease the shadow */
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adjust the spacing between buttons as needed */
+  }
+
+  

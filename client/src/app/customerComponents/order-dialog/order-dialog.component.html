@@ -1,0 +1,67 @@
+
+<!--div class="center-display"-->
+
+<div mat-dialog-content *ngIf="data.success; else unsuccessful" class="center-display">
+
+    <mat-icon class="large-icon">check_circle_outline</mat-icon>
+    <h1 style="color:green"><strong>Order Success</strong></h1>
+    <h2><strong>Order Id: {{data.orderId}}</strong></h2>
+    <p class="content-width">Thank you for purchasing from Munch Kitchen! We look forward to satisfying your taste buds! You will now be directed to page where you can check your order status</p>
+    <mat-dialog-actions>
+        <button mat-raised-button class="success-button" (click)="onSuccessOrder()">OK</button>
+    </mat-dialog-actions>
+</div>
+<!--/div-->
+
+<ng-template #unsuccessful>
+<div mat-dialog-content *ngIf="!data.success" class="center-display">
+    <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+    <h1 style="color:red"><strong>Order Unsuccessful</strong></h1>
+    <h3><strong>{{data.error.status}} {{data.error.statusText}}</strong></h3>
+    <h3><strong>{{data.error.error.error}}</strong></h3>
+    <p class="content-width">Oops..There seems to be an error causing order to be unsuccessful. Please reach out to us with the issue you encountered if problem persists</p>
+    <mat-dialog-actions>
+        <button mat-stroked-button color="warn" mat-dialog-close>OK</button>
+    </mat-dialog-actions>
+</div>
+</ng-template>
+
+<!--To display online payment error>
+<div mat-dialog-content *ngIf="data.cardError" class="center-display">
+    <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+    <h1 style="color:red"><strong>data.errorMessage</strong></h1>
+    <p class="content-width">data.errorMessage.message</p>
+    <mat-dialog-actions>
+        <button mat-stroked-button color="warn" mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div>
+
+<div mat-dialog-content *ngIf="!data.cardError" class="center-display">
+    <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+    <h1 style="color:red"><strong>data.errorMessage</strong></h1>
+    <p class="content-width">data.errorMessage.message</p>
+    <mat-dialog-actions>
+        <button mat-stroked-button color="warn" mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div-->
+
+<!--To display payment success or failure>
+<div mat-dialog-content *ngIf="data.successOrProcess" class="center-display">
+    <mat-icon class="large-icon">check_circle_outline</mat-icon>
+    <h1 style="color:green"><strong>data.paymentStatus</strong></h1>
+    <h2><strong>Order Id: {{data.orderId}}</strong></h2>
+    <p class="content-width">Thank you for purchasing from Munch Kitchen! We look forward to satisfying your taste buds! You can check your order status in this page.</p>
+    <p class="content-width">For payment that is processing, an email will be sent to you again to update if payment is successful or unsuccessful. We regret to inform you that order will be cancelled if payment is unsuccessful</p>
+    <mat-dialog-actions>
+        <button mat-raised-button class="success-button" (click)="onSuccessOrder()">OK</button>
+    </mat-dialog-actions>
+</div>
+
+<div mat-dialog-content *ngIf="!data.successOrProcess" class="center-display">
+    <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+    <h1 style="color:red"><strong>data.paymentStatus</strong></h1>
+    <p class="content-width">data.paymentStatus. Please try again</p>
+    <mat-dialog-actions>
+        <button mat-stroked-button (click)="onFailedPayment()">OK</button>
+    </mat-dialog-actions>
+</div-->

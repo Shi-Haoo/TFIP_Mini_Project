@@ -1,0 +1,13 @@
+
+<div class = "center-it">
+<form id="payment-form">
+
+    <!--Add one empty placeholder div to your checkout form for each Element that you’ll mount. Stripe inserts an iframe into each div to securely collect the customer’s email address and payment information.-->
+    <div id="payment-element" #paymentElement></div>
+    
+    <button mat-raised-button (click)="handleSubmit()" [ngStyle]="{'background-color': loading ? 'lightgray' : 'green', 'color': loading ? 'grey' : 'white'}" [disabled]="loading">
+        <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
+        <span id="button-text" [hidden]="loading">Confirm Payment</span>
+    </button>
+</form>
+</div>

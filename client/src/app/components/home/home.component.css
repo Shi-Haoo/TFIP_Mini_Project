@@ -1,0 +1,63 @@
+.home-container {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .home-content {
+    flex: 0 0 auto;
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    margin-left: 300px;
+    margin-top: 80px;
+    flex-direction: column;
+    
+  }
+
+  .home-title {
+    font-size: 52px;
+    font-style: normal;
+    font-family: Urbanist;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 50px;
+    width: 70%;
+  }
+
+  .home-text08 {
+    color: red;
+  }
+
+  .home-description {
+
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    width: 70%;
+  }
+
+  
+    .center-it {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color:#BEC4C7;
+      }
+  
+
+  .home-hero-image {
+    flex: 1;
+    max-width: 550px;
+    object-fit: cover;
+    border-radius: 48px;
+    margin-bottom: 50px;
+  }
+  
+
+  
+  

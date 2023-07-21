@@ -1,0 +1,19 @@
+
+<div class="center-it" *ngIf="username; else notloggedin"  >
+    <h1 class="home-title">Welcome {{ username }}!</h1>
+    <p class="home-description">What would you like to do today?</p>
+    
+    <div class="button-container">
+        <p><button mat-raised-button class="full-width-button" [routerLink]="['/retrieveOrders']">Retrieve Order Records</button> <span style="margin-left:40px;"><button mat-raised-button class="full-width-button" [routerLink]="['/updateProduct']">Update Product Description</button></span></p>
+        <p></p>
+        <p><button mat-raised-button class="full-width-button" [routerLink]="['/insertPhoto']">Insert New Product Photo</button> <span style="margin-left:40px;"><button mat-raised-button class="full-width-button" [routerLink]="['/updatePhoto']">Update Product Display Photo</button></span></p>
+        <p></p>
+    </div>
+    
+</div>
+
+<ng-template #notloggedin>
+    <div class="center-it">
+        <p class="home-title">Please <a mat-button color= accent [routerLink]="['/login']" class="home-title">Login</a> First</p>
+    </div>
+</ng-template>

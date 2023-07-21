@@ -1,0 +1,90 @@
+
+<mat-toolbar *ngIf="isLoggedIn" class="toolbar-style">
+  
+  <!--img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt14rPFIA94O7DpnLopSk2jA_GvG7ZGGlyqficgUXc0nINn5-1" width="100" height="70" alt=""-->
+
+    <div>
+      <span><strong>Munch Kitchen</strong></span>
+      &nbsp;
+      <button mat-icon-button [routerLink]="['/merchantHome']"> 
+        <mat-icon style="vertical-align: middle;">home</mat-icon>
+      </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a mat-button [routerLink]="['/updateProduct']"> Update Product Description </a>
+      <a mat-button [routerLink]="['/updatePhoto']"> Update Photo </a>
+      <a mat-button [routerLink]="['/insertPhoto']"> Insert New Photo </a>
+      <a mat-button [routerLink]="['/retrieveOrders']"> Order Records </a>
+    </div>
+      <span class="nav-spacer"></span>
+      <div>
+      <a mat-button (click)="logout()"> 
+        <mat-icon>exit_to_app</mat-icon>
+        Logout </a>
+    </div>
+  </mat-toolbar>
+
+    <mat-toolbar *ngIf="!isLoggedIn" class="toolbar-style">
+    <div>
+      <span><strong>Munch Kitchen</strong></span>
+      &nbsp;
+      <a mat-icon-button [routerLink]="['/']"> 
+        <mat-icon style="vertical-align: middle;">home</mat-icon>
+         </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <a mat-button [routerLink]="['/products']"> Products </a>
+      <!--a mat-button [routerLink]="['/recipe']"> Recipe </a-->
+      <a mat-button [routerLink]="['/contact']"> Contact Us </a>
+      <a mat-button [routerLink]="['/searchOrders']"> Search Orders </a>
+    </div>
+      <span class="nav-spacer"></span>
+
+    <div>
+      <a mat-icon-button (click)="sidenav.toggle()" [disabled]="showCartButton()"> <mat-icon [matBadge]="sumOfItems" style="vertical-align: middle;">shopping_cart</mat-icon></a>
+    </div>
+    
+</mat-toolbar>
+
+<!--Add sideNav when user click on cart-->
+<mat-sidenav-container >
+  <mat-sidenav #sidenav mode="over" position="end" class="custom-sidenav-container" >
+    <mat-list style="margin-left: 20px;" *ngIf="!cartEmpty; else empty">
+      <h1 matListItemTitle>Cart ({{ sumOfItems }})</h1>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let item of cart; let i = index">
+        <img matListItemAvatar [src] = "item.imgUrl" alt="" class="img">
+        <h3 matListItemTitle>
+          <span class="list-content-space">{{ item.transformedProductName }}</span>
+          <span class="list-content-space">{{ item.totalFinalPrice|currency }}</span>
+          <button mat-icon-button class="icon-button" (click)="removeItem(i)"><mat-icon>delete</mat-icon></button>
+        </h3>
+        
+        <p matListItemLine>
+          <span>Quantity: {{ item.quantity }}</span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <mat-divider style="margin-left: 20px;"></mat-divider>
+    <br>
+    <h3 class="total-price-style">Total: <span>{{ priceOfAllItems|currency }}</span></h3>
+    
+    <div class="checkout-button">
+      <button mat-raised-button [ngStyle]="{'background-color':  cartEmpty ? 'lightgray' : 'darkgreen', 'color': cartEmpty ? 'gray' : 'white', 'width':'100%'}" [disabled]="cartEmpty" (click)="onCheckout()">
+        <mat-icon>credit_card</mat-icon>
+        <span>Checkout</span>
+      </button>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty-cart">
+        <mat-icon> remove_shopping_cart </mat-icon>
+          <h1>Your cart is empty. Continue <a mat-button color= accent [routerLink]="['/products']">Shopping</a></h1>
+      </div>
+    </ng-template>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="custom-sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>

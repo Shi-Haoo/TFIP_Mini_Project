@@ -1,0 +1,51 @@
+
+<mat-card *ngIf="!isLoggedIn" else logout>
+    <mat-card-content>
+        <form [formGroup]="loginForm">
+            <h2>Log In</h2>
+            <mat-form-field>
+                <mat-label>Enter your username</mat-label>
+                <input matInput formControlName="username" placeholder="example: Esther97">
+                <!--By adding the safe navigation operator (?) after loginForm.get('username') and 
+                    loginForm.get('password'), you ensure that the .hasError method is only called 
+                    if the respective form control exists. This will prevent the "Object is possibly null" 
+                    error. "Object may be null" error happens because form control may be null or undefined
+                    at that point. This can happen if the form control has not been initialized properly or if it 
+                    is accessed before the form group is created.-->
+                <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                    Username is required.
+                  </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Enter your password</mat-label>
+                <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            <mat-hint>note: Password should have at least 7 characters</mat-hint>
+          
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is required.
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                Must have 7 characters or more
+            </mat-error>
+        </mat-form-field>
+        <br>
+            <button mat-raised-button color="accent" [disabled]="loginForm.invalid" class="full-width-button" (click)="processLogin()">Login</button>
+        </form>
+        <div>
+            <span>Dont have an account?</span>
+            <a mat-button color= accent [routerLink]="['/register']">Sign Up</a>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<ng-template #logout>
+    <mat-card>
+        <mat-card-content>
+            <mat-error>Please logout of your existing account</mat-error>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

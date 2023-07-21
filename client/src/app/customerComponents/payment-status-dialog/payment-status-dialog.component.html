@@ -1,0 +1,23 @@
+
+
+<div mat-dialog-content *ngIf="data.processing; else fail" class="center-display">
+    <mat-icon class="large-icon">check_circle_outline</mat-icon>
+    <h1 style="color:green"><strong>data.paymentStatus</strong></h1>
+    <h2><strong>Order Id: {{data.orderId}}</strong></h2>
+    <p class="content-width">Thank you for purchasing from Munch Kitchen! We look forward to satisfying your taste buds! You can check your order status in this page.</p>
+    <p class="content-width">For payment that is processing, an email will be sent to you again to update if payment is successful or unsuccessful. We regret to inform you that order will be cancelled if payment is unsuccessful</p>
+    <mat-dialog-actions>
+        <button mat-raised-button class="success-button" mat-dialog-close>OK</button>
+    </mat-dialog-actions>
+</div>
+
+<ng-template #fail>
+    <div mat-dialog-content class="center-display">
+        <mat-icon style="color:red; font-weight: bold;">cancel</mat-icon>
+        <h1 style="color:red"><strong>data.paymentStatus</strong></h1>
+        <p class="content-width">data.paymentStatus. Please try again</p>
+        <mat-dialog-actions>
+            <button mat-stroked-button (click)="onFailedPayment()">OK</button>
+        </mat-dialog-actions>
+    </div>
+</ng-template>

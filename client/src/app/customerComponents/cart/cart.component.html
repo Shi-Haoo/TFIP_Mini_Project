@@ -1,0 +1,73 @@
+<div class="header">
+    <h1><strong>My Cart</strong></h1>
+</div>
+
+<div class="container">
+<table mat-table [dataSource]="dataSource" *ngIf="!cartEmpty; else empty">
+    <!-- Product Column -->
+  <ng-container matColumnDef="productDetails">
+    <th mat-header-cell *matHeaderCellDef> Product </th>
+    <td mat-cell *matCellDef="let row"> 
+         <img class= "img" [src] = "row.imgUrl" alt=" "> 
+        {{row.transformedProductName}} </td>
+        <td mat-footer-cell *matFooterCellDef class="final-price"> Total </td>
+        
+  </ng-container>
+
+  <!-- Quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Quantity </th>
+    <td mat-cell *matCellDef="let row; let i = index"> 
+        <button mat-stroked-button color="accent" class="quantity-button" (click)="changeQuantity(row, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        <mat-form-field class="quantity-input" color="accent">
+            <input matInput placeholder="quantity" [value] = row.quantity readonly>
+          </mat-form-field>
+          
+          <button mat-stroked-button color="accent" class="quantity-button" (click)="changeQuantity(row, 1)">
+            <mat-icon>add</mat-icon>
+          </button> 
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- total final price Column -->
+  <ng-container matColumnDef="totalFinalPrice">
+    <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+    <td mat-cell *matCellDef="let row"> {{row.totalFinalPrice|currency}} </td>
+    <td mat-footer-cell *matFooterCellDef class="final-price"> {{priceOfAllItems | currency}} </td>
+    
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let i = index"> 
+        <button mat-icon-button style="color: red;" (click)="removeItem(i)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>     
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+
+</table>
+<mat-divider></mat-divider>
+<br>
+
+<div class="button">
+  <button mat-raised-button [routerLink]="['/products']">Back to Shopping</button>
+  &nbsp;&nbsp;&nbsp;
+  <button mat-raised-button  [ngStyle]="{'background-color':  cartEmpty ? 'lightgray' : 'green', 'color': cartEmpty ? 'grey' : 'white'}" (click)="saveFinalOrder()" [disabled]="cartEmpty">Continue</button>
+</div>
+</div>
+<ng-template #empty>
+    <div class="empty-cart">
+      <mat-icon> remove_shopping_cart </mat-icon>
+        <h1>Your cart is empty. Continue <a mat-button color= accent [routerLink]="['/products']">Shopping</a></h1>
+    </div>
+</ng-template>

@@ -1,0 +1,40 @@
+
+<div>
+    <h1 mat-dialog-title>Update Order Status</h1>
+</div>
+
+<div mat-dialog-content>
+    <form [formGroup]="updateOrderForm">
+        <mat-form-field>
+            <mat-label>Customer Name</mat-label>
+            <input matInput disabled [value]="data.customer_name">
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Order Id</mat-label>
+            <input matInput disabled [value]="data.order_id">
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Payment Status</mat-label>
+            <input matInput placeholder="Ex. paid/not paid/foc" formControlName="paymentStatus">
+            <mat-error *ngIf="updateOrderForm.get('paymentStatus')?.hasError('required')">
+                This field is mandatory
+              </mat-error>
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>Delivery Status</mat-label>
+            <input matInput placeholder="Ex. to be delivered" formControlName="deliveryStatus">
+            <mat-error *ngIf="updateOrderForm.get('deliveryStatus')?.hasError('required')">
+                This field is mandatory
+              </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button color="warn" (click)="onCancel()">Cancel</button>
+    <button mat-button class="color-button" cdkFocusInitial (click)="saveOrderStatus()">Save
+        <mat-icon>save</mat-icon>
+    </button>
+</div>

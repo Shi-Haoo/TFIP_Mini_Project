@@ -1,0 +1,63 @@
+
+
+    <div class="mini-header">
+        <span class="icon-container">
+            <mat-icon>local_shipping</mat-icon></span> 
+        <span class="text-container">Delivery service is currently unavailable. We will contact you to discuss on a collection venue that is convenient for you</span>
+  </div>
+
+  <div class="container">
+    <div class="image-container">
+        <img [src]="imageDataUrl" alt="" class="half-image">
+    </div>
+    <div class="content-container">
+        <h1 style="margin-top:40px;"><strong>{{ altProductName }}</strong></h1>
+        <h1>
+            <!--Use ngStyle directive to set the style-->
+            <span [ngStyle]="{'text-decoration': hasDiscount ? 'line-through' : 'none', 'color': hasDiscount ? 'gray' : 'green'}">
+                {{ finalPrice | currency }}
+              </span>
+              &nbsp;
+              <span *ngIf="hasDiscount" style="color: red;">{{ finalPrice | currency }}</span>
+        </h1>
+        <mat-form-field color="accent">
+            <mat-label>Select Kimchi Size</mat-label>
+            <!--when using mat-select, use (selectionChange) to detect changes and not (change)-->
+            <mat-select [value] = "selectedProductName" (selectionChange)="changeProductSize($event)">
+                <mat-option value="kimchi_500">500g</mat-option>
+                <mat-option value="kimchi_750">750g</mat-option>
+                </mat-select>
+        </mat-form-field>
+        <div>
+            <button mat-stroked-button color="accent" class="quantity-button" (click)="changeQuantity(-1)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            <mat-form-field class="quantity-input" color="accent">
+                <input matInput placeholder="quantity" [value]="quantity" readonly>
+              </mat-form-field>
+              
+              <button mat-stroked-button color="accent" class="quantity-button" (click)="changeQuantity(1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-raised-button color="accent" class="cart-button" (click)="addItemToCart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+                <span>Add to Cart</span>
+              </button>
+            </div>
+            <br>
+            <div>
+              <button mat-raised-button [ngStyle]="{'background-color':  cartEmpty ? 'lightgray' : 'green', 'color': cartEmpty ? 'grey':'white'}" class="cart-button" [disabled]="cartEmpty" [routerLink]="['/cart']">
+                <mat-icon>credit_card</mat-icon>
+                <span>Checkout</span>
+              </button>
+            </div>
+            <br>
+            <mat-divider style="width:70%"></mat-divider>
+            <br>
+            <h2>Product Description:</h2>
+            <p class="description">{{ productInfo.description }}</p>
+            
+    </div>
+  </div>
