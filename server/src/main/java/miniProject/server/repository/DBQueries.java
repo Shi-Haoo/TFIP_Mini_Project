@@ -40,9 +40,9 @@ public class DBQueries {
             o.payment_status, o.delivery_status, o.comments, 
             SUM(od.quantity * p.standard_price * (1 - p.discount)) AS total_price, 
             od.quantity, p.name 
-            FROM Orders o 
-            INNER JOIN Order_Details od ON o.order_id = od.order_id 
-            INNER JOIN Products p ON od.product_id = p.product_id 
+            FROM orders o 
+            INNER JOIN order_details od ON o.order_id = od.order_id 
+            INNER JOIN products p ON od.product_id = p.product_id 
             GROUP BY o.order_id, od.id 
             """;
 
@@ -67,9 +67,9 @@ public class DBQueries {
         SELECT o.order_id, o.customer_name, o.order_date, o.delivery_status, o.payment_status, 
             SUM(od.quantity * p.standard_price * (1 - p.discount)) AS total_price, 
             od.quantity, p.name 
-            FROM Orders o 
-            INNER JOIN Order_Details od ON o.order_id = od.order_id 
-            INNER JOIN Products p ON od.product_id = p.product_id
+            FROM orders o 
+            INNER JOIN order_details od ON o.order_id = od.order_id 
+            INNER JOIN products p ON od.product_id = p.product_id
             WHERE o.order_id = ? AND o.delivery_status != 'delivered' 
             GROUP BY o.order_id, od.id 
             """;

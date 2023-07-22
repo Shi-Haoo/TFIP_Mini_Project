@@ -37,6 +37,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
+		// Get the requested URL
+        String requestUrl = request.getRequestURI();
+
+        logger.info("Authenticating request for URL: " + requestUrl);
+		
+		if(!"/".equals(requestUrl)&& !"/favicon.ico".equals(requestUrl) && !"/index.html".equals(requestUrl)){
+
+			//if(!"/favicon.ico".equals(requestUrl)){
+
+			
+		logger.info("Authenticating request for URL with JWT: " + requestUrl);
+
 		String header = request.getHeader("Authorization");
 
 		if (header == null || !header.startsWith("Bearer")) {
@@ -62,6 +74,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 		}
 
-		filterChain.doFilter(request, response);
+		//}
+
 	}
+
+		// Log the next filter in the chain
+		logger.info("Next filter: " + filterChain.getClass().getSimpleName());
+		filterChain.doFilter(request, response);
+	
+}
 }

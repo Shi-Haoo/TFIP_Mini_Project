@@ -3,6 +3,7 @@ package miniProject.server.config;
 import javax.swing.Spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.RegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatchers;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import miniProject.server.security.ApiAuthenticationEntryPoint;
 import miniProject.server.security.authServices.UserAuthService;
@@ -38,9 +43,10 @@ public class WebSecurityConfig {
         return new JwtAuthenticationFilter();
     }
 
+    //Telling Spring Security to ignore these URLs. Usually should only be those in static resources which I have stated except for "/api/public/**"
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-    return (web) -> web.ignoring().requestMatchers("/api/public/**"); 
+    return (web) -> web.ignoring().requestMatchers("/api/public/**","/","/index.html","/styles.fcccd6e2c0f3aa6c.css","/assets/munch-app-image/manifest.json","/assets/munch-app-image/images/icons/icon-144x144.png","/main.c541e8d7c8fbad78.js","/polyfills.7f98574c8bab9a70.js","/runtime.7ae29a296d479790.js"); 
     }
 
 
@@ -51,6 +57,7 @@ public class WebSecurityConfig {
       authProvider.setUserDetailsService(userAuthService);
       authProvider.setPasswordEncoder(passwordEncoder());
    
+
       return authProvider;
     }
 
@@ -62,6 +69,10 @@ public class WebSecurityConfig {
         .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/api/public/**").permitAll()
+        .requestMatchers(request -> "/".equals(request.getRequestURI())).permitAll()
+        //.authorizeHttpRequests(auth -> auth.requestMatchers("/").permitAll()
+        //.authorizeHttpRequests(auth -> auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+        //.requestMatchers("/","/resources/static/**","/api/public/**").permitAll()
         //.requestMatchers("/api/protected/**").permitAll()
         .anyRequest().authenticated());
 
@@ -74,6 +85,7 @@ public class WebSecurityConfig {
         //will intercept all these requests and validate the jwt token, extract user info from token and sets
         //authenticated user in the Security Context   
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        
         return http.build();
     }
 
